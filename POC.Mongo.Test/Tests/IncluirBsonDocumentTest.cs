@@ -14,12 +14,10 @@ namespace POC.Mongo.Test.Tests
         private const string TRAIT_CONNECT_MONGO = "Incluir Mongo";
         Fixture fixture = new Fixture();
         readonly IMongoClient mongoClient;
-        readonly ILivroRepository _livroRepository;
 
         public IncluirBsonDocumentTest()
         {
-            mongoClient = Factory.GetInstanceMongoClient();
-            _livroRepository = new LivroRepository(mongoClient, "test");
+            mongoClient = new MongoClient("mongodb://mongoadmin:secret@192.168.0.3:27017/?authSource=admin");            
         }
 
         [Trait("Category", "SkipWhenLiveUnitTesting")]

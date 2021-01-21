@@ -19,8 +19,8 @@ namespace POC.Mongo.Test.Tests
 
         public IncluirTest()
         {
-            var mongoClient = Factory.GetInstanceMongoClient();
-            _livroRepository = new LivroRepository(mongoClient, "test");
+            var database = Factory.GetDatabaseInstance();
+            _livroRepository = new LivroRepository(database);
         }
 
         [Trait("Category", "SkipWhenLiveUnitTesting")]
@@ -30,7 +30,7 @@ namespace POC.Mongo.Test.Tests
         {
             var livros = MockLivros.GenerateListLivros();
             foreach (var livro in livros)
-                await _livroRepository.Insert(livro);
+                await _livroRepository.InsertAsync(livro);
         }
     }
 }

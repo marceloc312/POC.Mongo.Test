@@ -22,7 +22,7 @@ namespace POC.Mongo.Test.Tests
         public ListarTest(ITestOutputHelper output)
         {
             _output = output;
-            _livroRepository = new LivroRepository(Factory.GetInstanceMongoClient(), "test");
+            _livroRepository = new LivroRepository(Factory.GetDatabaseInstance());
             _livroCriteriaBuilder = new LivroCriteriaBuilder();
         }
 
@@ -33,7 +33,7 @@ namespace POC.Mongo.Test.Tests
             // Arrange
             ICriteria filtro = _livroCriteriaBuilder.Empty();
             // Act
-            var livros = await _livroRepository.Find(filtro);
+            var livros = await _livroRepository.FindAsync(filtro);
 
             // Assert
             _output.WriteLine($"Total livros: { livros.Count()}");
@@ -47,7 +47,7 @@ namespace POC.Mongo.Test.Tests
             // Arrange
             ICriteria filtro = _livroCriteriaBuilder.PorTitulo("A Dança com os Dragões");
             // Act
-            var livros = await _livroRepository.Find(filtro);
+            var livros = await _livroRepository.FindAsync(filtro);
 
             // Assert
             _output.WriteLine($"Total livros: { livros.Count()}");
@@ -61,7 +61,7 @@ namespace POC.Mongo.Test.Tests
             // Arrange
             ICriteria filtro = _livroCriteriaBuilder.PorAssuntos(new[] { "Ação", "Infantil" });
             // Act
-            var livros = await _livroRepository.Find(filtro);
+            var livros = await _livroRepository.FindAsync(filtro);
 
             // Assert
             _output.WriteLine($"Total livros: { livros.Count()}");
@@ -75,7 +75,7 @@ namespace POC.Mongo.Test.Tests
             // Arrange
             ICriteria filtro = _livroCriteriaBuilder.PorAnoLancamentoDeAte(2006, 2008);
             // Act
-            var livros = await _livroRepository.Find(filtro);
+            var livros = await _livroRepository.FindAsync(filtro);
 
             // Assert
             _output.WriteLine($"Total livros: { livros.Count()}");

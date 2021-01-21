@@ -7,7 +7,7 @@ namespace POC.Mongo.Test.Repositorys.Contracts
 {
     public interface ILivroRepository
     {
-        Task Insert(Livro model);
-        Task<IEnumerable<Livro>> Find(ICriteria criteria);
+        Task InsertAsync(Livro model);
+        Task<IEnumerable<Livro>> FindAsync(ICriteria criteria);
     }
 }

@@ -1,14 +1,21 @@
 ﻿using MongoDB.Driver;
+using POC.Mongo.Test.Repositorys;
+using POC.Mongo.Test.Repositorys.Contracts;
 using System.Collections.Generic;
 
 namespace POC.Mongo.Test.Factories
 {
-    public static class Factory
+    public sealed class Factory
     {
-        static IMongoClient _instanceMongo;
-        public static IMongoClient GetInstanceMongoClient()
+        static IDatabase _database;
+        public static IDatabase GetDatabaseInstance()
         {
-            return _instanceMongo = _instanceMongo ?? new MongoClient("mongodb://mongoadmin:secret@192.168.0.3:27017/?authSource=admin");
+            if (_database == null)
+            {
+                _database = new Database(new DatabaseSettings("mongodb://mongoadmin:secret@192.168.0.3:27017/?authSource=admin", "test"));
+            }
+
+            return _database;
         }
     }
 }
